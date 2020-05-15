@@ -1,8 +1,7 @@
 import time
 from os import path
-from ls_bst import BinarySearchTree
 
-src_dir = path.split(path.abspath(__file__))[0]  # absolute path to source file
+src_dir = path.split(path.abspath(__file__))[0]  # absolute path to folder
 names1 = path.join(src_dir, 'names_1.txt')  # absolute path to names_1.txt
 names2 = path.join(src_dir, 'names_2.txt')  # absolute path to names_2.txt
 
@@ -14,20 +13,29 @@ f = open(names2, 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
+
+def print_duplicates(lst):
+    print(f"{len(lst)} duplicates:\n\n{', '.join(lst)}\n\n")
+
+
+def print_runtime(descr, s, e):
+    print(f"[{descr}] runtime: {e - s} seconds")
+
+
 start_time = time.time()
 
 duplicates = []  # Return the list of duplicates in this data structure
 
-# originally 2 nested for_loops
+description = "originally 2 nested for_loops"
 for name_1 in names_1:
     for name_2 in names_2:
         if name_1 == name_2:
             duplicates.append(name_1)
 end_time = time.time()
-print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print(f"runtime: {end_time - start_time} seconds")
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
 
-# solution 1: one for-loop
+description = "solution 1: one for-loop"
 start_time = time.time()
 duplicates = []  # Return the list of duplicates in this data structure
 
@@ -36,17 +44,16 @@ for name in names_1:
         duplicates.append(name)
 
 end_time = time.time()
-print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print(f"solution 1: one for-loop -> runtime {end_time - start_time} seconds")
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
 
-# solution 2: list comprehension
+description = "solution 2: list comprehension"
 start_time = time.time()
 duplicates = []  # Return the list of duplicates in this data structure
 [duplicates.append(name) for name in names_1 if name in names_2]
 end_time = time.time()
-print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print(
-    f"solution2: list comprehension -> runtime: {end_time - start_time} seconds")
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
 
 
 # ---------- Stretch Goal -----------
