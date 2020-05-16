@@ -101,6 +101,18 @@ end_time = time.time()
 print_duplicates(duplicates)
 print_runtime(description, start_time, end_time)
 
+description = "BST with lambda filter"
+bst = BinarySearchTree(names_1.pop(start_name))
+for name in names_1:
+    bst.insert(name)
+# start timer
+start_time = time.time()
+duplicates = list(filter(lambda name: bst.contains(name), names_2))
+end_time = time.time()
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
+
+
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
 # What's the best time you can accomplish?  Thare are no restrictions on techniques or data
