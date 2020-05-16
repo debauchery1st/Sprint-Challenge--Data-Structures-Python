@@ -1,5 +1,7 @@
 import time
 from os import path
+from ls_bst import BinarySearchTree
+
 
 src_dir = path.split(path.abspath(__file__))[0]  # absolute path to folder
 names1 = path.join(src_dir, 'names_1.txt')  # absolute path to names_1.txt
@@ -55,6 +57,49 @@ end_time = time.time()
 print_duplicates(duplicates)
 print_runtime(description, start_time, end_time)
 
+
+description = "solution 3: BST start with _ "
+start_time = time.time()
+duplicates = []
+bst = BinarySearchTree("_")
+for name in names_1:
+    bst.insert(name)
+for name in names_2:
+    if bst.contains(name):
+        duplicates.append(name)
+end_time = time.time()
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
+
+description = "solution 4: BST start with name A"
+start_name = names_1.index("Abagail Dillon")
+start_time = time.time()
+duplicates = []
+print(names_1[start_name])
+bst = BinarySearchTree(names_1.pop(start_name))
+for name in names_1:
+    bst.insert(name)
+for name in names_2:
+    if bst.contains(name):
+        duplicates.append(name)
+end_time = time.time()
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
+
+description = "solution 4: BST start with Z "
+start_name = names_1.index("Zackery Meadows")
+start_time = time.time()
+duplicates = []
+# print(names_1[start_name])
+bst = BinarySearchTree(names_1.pop(start_name))
+for name in names_1:
+    bst.insert(name)
+for name in names_2:
+    if bst.contains(name):
+        duplicates.append(name)
+end_time = time.time()
+print_duplicates(duplicates)
+print_runtime(description, start_time, end_time)
 
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
